@@ -24,7 +24,7 @@ app.get("/produtos", async (req, res) => {
   }
 });
 
-app.get("/produto/:find", async (req, res) => {
+app.get("/produtos/:find", async (req, res) => {
   const find = req.params.find;
 
   let data = await Product.find({

@@ -8,7 +8,6 @@ const ProductSchema = new mongoose.Schema({
 
   valor: {
     type: Number,
-    require: true,
   },
 
   descricao: {

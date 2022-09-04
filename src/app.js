@@ -24,30 +24,31 @@ app.get("/produtos", async (req, res) => {
   }
 });
 
-app.get("/produtos/:find", async (req, res) => {
-  const find = req.params.find;
-
-  let products = await Product.find({
-    $or: [{ produto: { $regex: find } }, { descricao: { $regex: find } }],
-  });
-  res.send({ products });
-});
-
-app.get("/produtos/:id", async (req, res) => {
+app.get("/produtos/:product_id", async (req, res) => {
   try {
-    const productById = req.params.id;
-    const products = await Product.findById(productById);
-    res.send({ products });
+    const productId = req.params.product_id;
+    const product = await Product.findById(productId);
+
+    res.send(product);
   } catch (error) {
     res.status(400).send(error);
   }
+});
+
+app.get("/produto/:find", async (req, res) => {
+  const find = req.params.find;
+
+  let data = await Product.find({
+    $or: [{ produto: { $regex: find } }, { descricao: { $regex: find } }],
+  });
+  res.send(data);
 });
 
 app.post("/produtos", async (req, res) => {
   try {
     const { produto, valor, descricao } = req.body;
     const product = await Product.create({ produto, valor, descricao });
-    res.send({ product });
+    res.send(product);
   } catch (error) {
     res.status(400).send(error);
   }
